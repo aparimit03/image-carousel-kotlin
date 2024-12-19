@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.imagecarousellibrary"
+    namespace = "com.example.carousel"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.imagecarousellibrary"
+        applicationId = "com.example.carousel"
         minSdk = 22
         targetSdk = 34
         versionCode = 1
@@ -37,13 +37,15 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-//    Extra dependencies for the library
-    implementation(libs.picasso)
+//    Dependencies for the library
+    api(libs.picasso)
+    implementation(libs.glide)
     implementation(libs.androidx.multidex)
 }

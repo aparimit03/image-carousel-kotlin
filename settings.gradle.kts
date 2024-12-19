@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Image Carousel Library"
 include(":app")
+include(":carousel")
