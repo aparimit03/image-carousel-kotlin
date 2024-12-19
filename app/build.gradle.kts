@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.imagecarousellibrary"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.imagecarousellibrary"
@@ -14,6 +14,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -36,11 +37,14 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+//    Extra dependencies for the library
+    implementation(libs.picasso)
+    implementation(libs.androidx.multidex)
+    implementation(libs.carousels.kotlin)
 }
