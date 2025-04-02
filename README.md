@@ -1,4 +1,4 @@
-# Carousel Kotlin Image Slider
+# Glyd - The Carousel Image Slider Library
 
 [![](https://jitpack.io/v/aparimit03/image-carousel-kotlin.svg)](https://jitpack.io/#aparimit03/image-carousel-kotlin)
 
