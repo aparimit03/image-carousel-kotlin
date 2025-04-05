@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.github.aparimit03"
-version = "1.2.0"
+version = "1.3.0"
 
 afterEvaluate {
     val sourcesJar = tasks.register("androidSourcesJar", Jar::class) {
@@ -19,7 +19,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.aparimit03"
                 artifactId = "carousel"
-                version = "1.2.0"
+                version = "1.3.0"
 
                 artifact(sourcesJar.get())
             }
