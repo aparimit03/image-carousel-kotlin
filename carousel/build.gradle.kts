@@ -8,7 +8,7 @@ group = "com.github.aparimit03"
 version = "1.2.0"
 
 afterEvaluate {
-    tasks.register("androidSourcesJar", Jar::class) {
+    val sourcesJar = tasks.register("androidSourcesJar", Jar::class) {
         archiveClassifier.set("sources")
         from(android.sourceSets["main"].java.srcDirs)
     }
@@ -21,9 +21,13 @@ afterEvaluate {
                 artifactId = "carousel"
                 version = "1.2.0"
 
-                artifact(tasks["androidSourcesJar"])
+                artifact(sourcesJar.get())
             }
         }
+    }
+
+    tasks.named("generateMetadataFileForReleasePublication") {
+        dependsOn(sourcesJar)
     }
 }
 
