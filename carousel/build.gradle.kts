@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.github.aparimit03"
-version = "1.5.0"
+version = "1.6.0"
 
 android {
     namespace = "com.example.carousel"
@@ -47,14 +47,14 @@ afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("release") {
-                // Access the 'release' variant after evaluation
-                from(components.findByName("release"))
-
+                from(components["release"])
                 groupId = "com.github.aparimit03"
                 artifactId = "carousel"
-                version = "1.5.0"
+                version = "1.6.0"
 
-                artifact(androidSourcesJar.get())
+                artifact(androidSourcesJar.get()) {
+                    builtBy(androidSourcesJar)
+                }
             }
         }
     }
