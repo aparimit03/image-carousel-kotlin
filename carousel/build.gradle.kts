@@ -1,7 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    `maven-publish`
 }
+
+group = "com.github.aparimit03"
+version = "1.1.0"
 
 android {
     namespace = "com.example.carousel"
