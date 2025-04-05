@@ -5,31 +5,7 @@ plugins {
 }
 
 group = "com.github.aparimit03"
-version = "1.3.0"
-
-afterEvaluate {
-    val sourcesJar = tasks.register("androidSourcesJar", Jar::class) {
-        archiveClassifier.set("sources")
-        from(android.sourceSets["main"].java.srcDirs)
-    }
-
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                groupId = "com.github.aparimit03"
-                artifactId = "carousel"
-                version = "1.3.0"
-
-                artifact(sourcesJar.get())
-            }
-        }
-    }
-
-    tasks.named("generateMetadataFileForReleasePublication") {
-        dependsOn(sourcesJar)
-    }
-}
+version = "1.4.0"
 
 android {
     namespace = "com.example.carousel"
@@ -51,24 +27,51 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
 }
 
-dependencies {
+afterEvaluate {
+    val androidSourcesJar by tasks.registering(Jar::class) {
+        archiveClassifier.set("sources")
+        from(android.sourceSets["main"].java.srcDirs)
+    }
 
+    // 🛠️ Fix: Only set dependsOn if the target task exists
+    tasks.findByName("generateMetadataFileForReleasePublication")?.let { task ->
+        task.dependsOn(androidSourcesJar)
+    }
+
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.aparimit03"
+                artifactId = "carousel"
+                version = project.version.toString()
+
+                artifact(androidSourcesJar.get())
+            }
+        }
+    }
+}
+
+dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-//    Dependencies for the library
+
     api(libs.picasso)
     implementation(libs.glide)
     implementation(libs.androidx.multidex)
